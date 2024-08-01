@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Esports Tournament Registration</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Register for the Esports Tournament</h1>
+  <form id="registrationForm">
+    <label>Team Name: <input type="text" id="teamName" required></label><br>
+    <label>Team Members (Comma separated): <input type="text" id="teamMembers" required></label><br>
+    <label>Game IDs (Comma separated): <input type="text" id="gameIDs" required></label><br>
+    <label>WhatsApp Number: <input type="text" id="whatsappNumber" required></label><br>
+    <button type="submit">Register</button>
+  </form>
+  <div id="paymentSection" style="display:none;">
+    <h2>Complete Payment</h2>
+    <label>Amount: <input type="number" id="amount" required></label><br>
+    <label>Card Details: <input type="text" id="cardDetails" required></label><br>
+    <button id="payButton">Pay</button>
+  </div>
+  <script src="https://js.stripe.com/v3/"></script>
+  <script src="app.js"></script>
+</body>
+</html>
