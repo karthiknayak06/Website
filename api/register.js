@@ -3,7 +3,7 @@ const { googleSheets } = require('./config');
 
 async function storeData(teamData) {
   const auth = new google.auth.GoogleAuth({
-    keyFile: googleSheets.credentials,
+    credentials: googleSheets.credentials,
     scopes: ['https://www.googleapis.com/auth/spreadsheets']
   });
   const authClient = await auth.getClient();
@@ -28,4 +28,16 @@ async function storeData(teamData) {
   }
 }
 
-module.exports = { storeData };
+module.exports = async (req, res) => {
+  if (req.method === 'POST') {
+    const { teamName, teamMembers, gameIDs, whatsappNumber } = req.body;
+    try {
+      await storeData([teamName, ...teamMembers, ...gameIDs, whatsappNumber]);
+      res.status(200).send('Registration successful!');
+    } catch (error) {
+      res.status(500).send('Error during registration: ' + error.message);
+    }
+  } else {
+    res.status(405).send('Method not allowed');
+  }
+};
